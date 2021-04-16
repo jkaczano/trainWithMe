@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Train with me!</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="fontello-846899ce/css/fontello.css">
+</head>
+<body>
+
+<div id="container">
+    <div class="rectangle">
+        <a href="hello"><img src="bic.png" style="margin-top: 10px; padding-left: 20px; float: left;"></a>
+        <h1>Come and train with me!</h1>
+        Hello<span th:text = " ${role} "></span><span th:text = "${name}"></span>
+        <div><a href="add">Add+</a></div>
+    </div>
+
+    <div class="square">
+        <a href="myPlan"><div class="tile"><i class="icon-calendar"></i><br> Show workout schedule</div></a>
+        <a href="progress"><div class="tile"><i class="icon-chart-line"></i><br> Track my progress</div></a>
+        <div style="clear: both;"></div>
+        <a href="excercises"><div class="tile"><i class="icon-list-alt"></i><br> Description of excersises</div></a>
+        <a href="about"><div class="tile"><i class="icon-user"></i><br>Why is my coach so awesome?</div></a>
+        <div style="clear: both;"></div>
+    </div>
+
+    <div class="square">
+        <form th:action=@{/add} method="post">
+            Topic:
+            <input type="text" name="topic">
+            Description:
+            <input type="text" name="description">
+            User ID:
+            <input type="number" name="userID">
+            Date:
+            <input type="date" name="date">
+            <input type="submit" value="Add unit">
+        </form>
+    </div>
+
+    <div style="clear: both;"></div>
+    <div class="square">
+        <div class="yt"><a href="https://www.youtube.com/channel/UCSCUhYRfuqvas6lF1KVl0-A" target="_blank">
+            <i class="icon-youtube"></i></a>
+        </div>
+
+        <div class="git">
+            <a href="https://github.com/jkaczano" target="_blank"><i class="icon-git-squared"></i></a>
+        </div>
+
+        <div class="ig">
+            <a href="https://www.instagram.com/predzej.martwy.niz.slaby/" target="_blank"><i class="icon-instagram"></i></a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
