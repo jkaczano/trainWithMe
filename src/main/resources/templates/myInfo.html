@@ -13,7 +13,7 @@
         <a href="hello"><img src="bic.png" style="padding-left: 20px; float: left;"></a>
 
         <h1>Come and train with me!</h1>
-        Hello<span th:text = " ${role} "></span><span th:text = "${name}"></span>
+        Hello <span th:text = " ${role} "></span> <span th:text = "${name}"></span>
     </div>
     <div class="square">
         <a href="myPlan"><div class="tile"><i class="icon-calendar"></i><br> Show workout schedule</div></a>
@@ -24,9 +24,23 @@
         <div style="clear: both;"></div>
     </div>
     <div class="square">
-        <tr th:each="unit: ${units}">
-            <td th:text="${unit.getDescription()}">
-        </tr>
+
+        <form th:action=@{/addInfo} method="post">
+            Body mass (kg):
+            <input type="text" step="any" name="bodyMass">
+            Height (cm):
+            <input type="text" name="height">
+            Pull ups:
+            <input type="text" name="pullUps">
+            Push ups:
+            <input type="text" name="pushUps">
+            Squats:
+            <input type="text" name="squats">
+            Date:
+            <input type="date" name="date">
+            <input type="submit" value="Add info">
+        </form>
+
     </div>
     <div style="clear: both;"></div>
     <div class="square">

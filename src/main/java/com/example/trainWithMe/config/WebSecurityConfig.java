@@ -38,7 +38,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/progress").hasRole("USER")
                 .antMatchers("/excercises").hasRole("USER")
                 .antMatchers("/about").hasRole("USER")
-                .antMatchers("/add").hasRole("ADMIN")
+                .antMatchers("/addUnit").hasRole("ADMIN")
+                .antMatchers("/myInfo").hasRole("USER")
+                .antMatchers("/static/favicon.ico").permitAll()
                 .and()
                 .formLogin().defaultSuccessUrl("/hello");
     }

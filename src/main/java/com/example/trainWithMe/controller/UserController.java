@@ -3,11 +3,14 @@ package com.example.trainWithMe.controller;
 import com.example.trainWithMe.model.AppUser;
 import com.example.trainWithMe.model.Token;
 import com.example.trainWithMe.model.TrainingUnit;
+import com.example.trainWithMe.model.UserInfo;
 import com.example.trainWithMe.repo.AppUserRepo;
 import com.example.trainWithMe.repo.TokenRepo;
 import com.example.trainWithMe.repo.TrainingUnitRepo;
+import com.example.trainWithMe.repo.UserInfoRepo;
 import com.example.trainWithMe.service.TrainingUnitService;
 import com.example.trainWithMe.service.UserService;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -28,13 +31,15 @@ public class UserController {
     private AppUserRepo appUserRepo;
     private TrainingUnitRepo trainingUnitRepo;
     private TrainingUnitService trainingUnitService;
+    private UserInfoRepo userInfoRepo;
 
-    public UserController(UserService userService, TokenRepo tokenRepo,AppUserRepo appUserRepo, TrainingUnitRepo trainingUnitRepo, TrainingUnitService trainingUnitService) {
+    public UserController(UserService userService, TokenRepo tokenRepo,AppUserRepo appUserRepo, TrainingUnitRepo trainingUnitRepo, TrainingUnitService trainingUnitService, UserInfoRepo userInfoRepo) {
         this.userService = userService;
         this.tokenRepo = tokenRepo;
         this.appUserRepo = appUserRepo;
         this.trainingUnitRepo = trainingUnitRepo;
         this.trainingUnitService = trainingUnitService;
+        this.userInfoRepo = userInfoRepo;
     }
 
     @GetMapping("/hello")
@@ -42,7 +47,7 @@ public class UserController {
         model.addAttribute("name",principal.getName());
         Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
         String role = authorities.toString();
-        if(role.contains("ROLE_ADMIN")) role = "Admin";
+        if(role.contains("ROLE_ADMIN")) role = "Coach";
         if(role.contains("ROLE_USER")) role = "User";
         model.addAttribute("role",role);
         return "hello";
@@ -69,6 +74,9 @@ public class UserController {
     @GetMapping("/myPlan")
     public String myPlan(Principal principal, Model model){
         model.addAttribute("name",principal.getName());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        AppUser appUser = (AppUser) authentication.getPrincipal();
+        model.addAttribute("units", trainingUnitRepo.findByUserID(appUser.getId()));
         return "myPlan";
     }
     @GetMapping("/about")
@@ -76,10 +84,11 @@ public class UserController {
         model.addAttribute("name",principal.getName());
         return "about";
     }
-    @GetMapping("/excercises")
-    public String excercises(Model model, Principal principal){
-        model.addAttribute("units", trainingUnitRepo.findByUserID((long) 2));
-        return "excercises";
+    @GetMapping("/myInfo")
+    public String myInfo(Model model, Principal principal){
+        model.addAttribute("name",principal.getName());
+        model.addAttribute("info",new UserInfo());
+        return "myInfo";
     }
     @GetMapping("/progress")
     public String progress(Principal principal, Model model){
@@ -96,5 +105,14 @@ public class UserController {
     public String add(TrainingUnit trainingUnit){
         trainingUnitRepo.save(trainingUnit);
         return "addUnit";
+    }
+
+    @PostMapping("/addInfo")
+    public String addInfo(UserInfo userInfo){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        AppUser appUser = (AppUser) authentication.getPrincipal();
+        userInfo.setUserID(appUser.getId());
+        userInfoRepo.save(userInfo);
+        return "myInfo";
     }
 }
