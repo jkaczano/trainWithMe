@@ -5,6 +5,8 @@
     <title>Train with me!</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" type="text/css" href="fontello-846899ce/css/fontello.css">
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 
@@ -13,22 +15,33 @@
         <a href="hello"><img src="bic.png" style="padding-left: 20px; float: left;"></a>
 
         <h1>Come and train with me!</h1>
-        Hello <span th:text = " ${role} "></span> <span th:text = "${name}"></span>
+        Hello <span th:text=" ${role} "></span> <span th:text="${name}"></span>
     </div>
     <div class="square">
-        <a href="myPlan"><div class="tile"><i class="icon-calendar"></i><br> Show workout schedule</div></a>
-        <a href="progress"><div class="tile"><i class="icon-chart-line"></i><br> Track my progress</div></a>
+        <a href="myPlan">
+            <div class="tile"><i class="icon-calendar"></i><br> Show workout schedule</div>
+        </a>
+        <a href="progress">
+            <div class="tile"><i class="icon-chart-line"></i><br> Track my progress</div>
+        </a>
         <div style="clear: both;"></div>
-        <a href="excercises"><div class="tile"><i class="icon-list-alt"></i><br> Description of excersises</div></a>
-        <a href="about"><div class="tile"><i class="icon-user"></i><br>Why is my coach so awesome?</div></a>
+        <a href="myInfo">
+            <div class="tile"><i class="icon-list-alt"></i><br> Add my info</div>
+        </a>
+        <a href="about">
+            <div class="tile"><i class="icon-user"></i><br>Why is my coach so awesome?</div>
+        </a>
         <div style="clear: both;"></div>
     </div>
 
     <div class="square">
-        Here is the chart of my progress
+
+        <div id="my_data"></div>
+        <script type="text/javascript" th:src="@{/js/chart.js}"></script>
     </div>
 
     <div style="clear: both;"></div>
+
     <div class="square">
         <div class="yt"><a href="https://www.youtube.com/channel/UCSCUhYRfuqvas6lF1KVl0-A" target="_blank">
             <i class="icon-youtube"></i></a>
@@ -42,6 +55,8 @@
             <a href="https://www.instagram.com/predzej.martwy.niz.slaby/" target="_blank"><i class="icon-instagram"></i></a>
         </div>
     </div>
+    <div style="clear: both;"></div>
+    <div class="footer">Created by Jacek Kaczanowski &copy;</div>
 </div>
 </body>
 </html>

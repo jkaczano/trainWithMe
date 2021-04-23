@@ -10,18 +10,17 @@ import com.example.trainWithMe.repo.TrainingUnitRepo;
 import com.example.trainWithMe.repo.UserInfoRepo;
 import com.example.trainWithMe.service.TrainingUnitService;
 import com.example.trainWithMe.service.UserService;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.*;
 
 @Controller
 public class UserController {
@@ -95,6 +94,29 @@ public class UserController {
         model.addAttribute("name",principal.getName());
         return "progress";
     }
+
+    @RequestMapping("/progressChart")
+    @ResponseBody
+    public String progressChart() {
+        List<UserInfo> infoList = userInfoRepo.findAll();
+        JsonArray jsonDate = new JsonArray();
+        JsonArray jsonMass = new JsonArray();
+        JsonArray jsonPullUps = new JsonArray();
+        JsonObject json = new JsonObject();
+        infoList.forEach(info ->{
+            jsonDate.add(String.valueOf(info.getDate()));
+            jsonMass.add(info.getBodyMass());
+            jsonPullUps.add(info.getPullUps());
+        });
+        json.add("date",jsonDate);
+        json.add("mass",jsonMass);
+        json.add("pullUps",jsonPullUps);
+
+        //Map<String,List<UserInfo>> dataMap = new HashMap<>();
+        //dataMap.put("bodyMass",infoList);
+        return json.toString();
+    }
+
     @GetMapping("/addUnit")
     public String addUnit(Model model){
         model.addAttribute("unit",new TrainingUnit());
