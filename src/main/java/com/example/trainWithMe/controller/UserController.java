@@ -41,14 +41,17 @@ public class UserController {
         this.userInfoRepo = userInfoRepo;
     }
 
-    @GetMapping("/hello")
-    public String hello(Principal principal, Model model){
-        model.addAttribute("name",principal.getName());
+    public String getRole(){
         Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
         String role = authorities.toString();
         if(role.contains("ROLE_ADMIN")) role = "Coach";
         if(role.contains("ROLE_USER")) role = "User";
-        model.addAttribute("role",role);
+        return role;
+    }
+    @GetMapping("/hello")
+    public String hello(Principal principal, Model model){
+        model.addAttribute("name",principal.getName());
+        model.addAttribute("role",getRole());
         return "hello";
     }
 
@@ -76,22 +79,26 @@ public class UserController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         AppUser appUser = (AppUser) authentication.getPrincipal();
         model.addAttribute("units", trainingUnitRepo.findByUserID(appUser.getId()));
+        model.addAttribute("role",getRole());
         return "myPlan";
     }
     @GetMapping("/about")
     public String about(Principal principal, Model model){
         model.addAttribute("name",principal.getName());
+        model.addAttribute("role",getRole());
         return "about";
     }
     @GetMapping("/myInfo")
     public String myInfo(Model model, Principal principal){
         model.addAttribute("name",principal.getName());
         model.addAttribute("info",new UserInfo());
+        model.addAttribute("role",getRole());
         return "myInfo";
     }
     @GetMapping("/progress")
     public String progress(Principal principal, Model model){
         model.addAttribute("name",principal.getName());
+        model.addAttribute("role",getRole());
         return "progress";
     }
 
@@ -120,6 +127,7 @@ public class UserController {
     @GetMapping("/addUnit")
     public String addUnit(Model model){
         model.addAttribute("unit",new TrainingUnit());
+        model.addAttribute("role",getRole());
         return "addUnit";
     }
 
@@ -130,11 +138,14 @@ public class UserController {
     }
 
     @PostMapping("/addInfo")
-    public String addInfo(UserInfo userInfo){
+    public String addInfo(UserInfo userInfo, Model model,Principal principal){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         AppUser appUser = (AppUser) authentication.getPrincipal();
         userInfo.setUserID(appUser.getId());
+        System.out.println(userInfo.getDate());
         userInfoRepo.save(userInfo);
+        model.addAttribute("name",principal.getName());
+        model.addAttribute("role",getRole());
         return "myInfo";
     }
 }

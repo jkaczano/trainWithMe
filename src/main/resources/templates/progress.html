@@ -12,10 +12,14 @@
 
 <div id="container">
     <div class="rectangle">
-        <a href="hello"><img src="bic.png" style="padding-left: 20px; float: left;"></a>
-
-        <h1>Come and train with me!</h1>
-        Hello <span th:text=" ${role} "></span> <span th:text="${name}"></span>
+        <a href="hello"><img src="bic.png" style="margin-top: 10px; padding-left: 20px; float: left;"></a>
+        <div style="margin-left: 200px;  float: left;">
+            <h1>Come and train with me!</h1>
+            Hello <span th:text = "${role}"></span> <span th:text = "${name}"></span>
+        </div>
+        <div style="float: left; margin-left: 150px;margin-top: 40px;">
+            <a href="logout">Logout</a>
+        </div>
     </div>
     <div class="square">
         <a href="myPlan">
@@ -36,11 +40,11 @@
 
     <div class="square">
 
-        <div id="my_data"></div>
+        <div id="my_data" style="max-height: 380px;"></div>
         <script type="text/javascript" th:src="@{/js/chart.js}"></script>
     </div>
 
-    <div style="clear: both;"></div>
+    <div style="clear: both; "></div>
 
     <div class="square">
         <div class="yt"><a href="https://www.youtube.com/channel/UCSCUhYRfuqvas6lF1KVl0-A" target="_blank">

@@ -3,7 +3,7 @@ package com.example.trainWithMe.model;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 public class TrainingUnit {
@@ -27,9 +27,9 @@ public class TrainingUnit {
     private String description;
     private String topic;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date date;
+    private LocalDate date;
 
-    public TrainingUnit(Long unitID, Long userID, String description, String topic, Date date) {
+    public TrainingUnit(Long unitID, Long userID, String description, String topic, LocalDate date) {
         this.unitID = unitID;
         this.userID = userID;
         this.description = description;
@@ -37,11 +37,11 @@ public class TrainingUnit {
         this.date = date;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

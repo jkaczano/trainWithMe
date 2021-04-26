@@ -11,9 +11,13 @@
 <div id="container">
     <div class="rectangle">
         <a href="hello"><img src="bic.png" style="margin-top: 10px; padding-left: 20px; float: left;"></a>
-        <h1>Come and train with me!</h1>
-        Hello <span th:text = " ${role} "></span> <span th:text = "${name}"></span>
-        <div><a href="add">Add+</a></div>
+        <div style="margin-left: 200px;  float: left;">
+            <h1>Come and train with me!</h1>
+            Hello <span th:text = "${role}"></span> <span th:text = "${name}"></span>
+        </div>
+        <div style="float: left; margin-left: 150px;margin-top: 40px;">
+            <a href="logout">Logout</a>
+        </div>
     </div>
 
     <div class="square">
@@ -53,6 +57,8 @@
             <a href="https://www.instagram.com/predzej.martwy.niz.slaby/" target="_blank"><i class="icon-instagram"></i></a>
         </div>
     </div>
+    <div style="clear: both;"></div>
+    <div class="footer">Created by Jacek Kaczanowski &copy;</div>
 </div>
 </body>
 </html>

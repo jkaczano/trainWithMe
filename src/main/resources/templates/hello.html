@@ -11,17 +11,21 @@
 <div id="container">
     <div class="rectangle">
         <a href="hello"><img src="bic.png" style="margin-top: 10px; padding-left: 20px; float: left;"></a>
-        <h1>Come and train with me!</h1>
-        Hello <span th:text = "${role}"></span> <span th:text = "${name}"></span>
-        <div><a href="addUnit">Add+</a></div>
-        <a href="logout" style="float: right;">Logout</a>
+            <div style="margin-left: 200px;  float: left;">
+                <h1>Come and train with me!</h1>
+                Hello <span th:text = "${role}"></span> <span th:text = "${name}"></span>
+            </div>
+            <div style="float: left; margin-left: 150px;margin-top: 40px;">
+                <a href="logout">Logout</a>
+            </div>
     </div>
 
     <div class="square">
         <a href="myPlan"><div class="tile"><i class="icon-calendar"></i><br> Show workout schedule</div></a>
         <a href="progress"><div class="tile"><i class="icon-chart-line"></i><br> Track my progress</div></a>
         <div style="clear: both;"></div>
-        <a href="myInfo"><div class="tile"><i class="icon-list-alt"></i><br> Add my info</div></a>
+        <a th:if="${role == 'Coach'}" href="addUnit"><div class="tile"><i class="icon-list-alt"></i><br> Add unit</div></a>
+        <a th:if="${role == 'User'}" href="myInfo"><div class="tile"><i class="icon-list-alt"></i><br> Add my info</div></a>
         <a href="about"><div class="tile"><i class="icon-user"></i><br>Why is my coach so awesome?</div></a>
         <div style="clear: both;"></div>
     </div>

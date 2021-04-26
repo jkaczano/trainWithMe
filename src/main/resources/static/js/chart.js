@@ -15,18 +15,19 @@ Highcharts.chart('my_data',{
         width: 500
     },
     title: {
-        text: 'LineChart',
+        text: 'My progress',
     },
     xAxis: {
         categories: date
     },
     series: [{
+        name: 'Mass',
         data: mass
     },
     {
+        name: 'Pull ups',
         data: pullUps
-    }
-    ]
+    }]
 
 });
 }

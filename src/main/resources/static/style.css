@@ -1,6 +1,7 @@
 body
 {
     background-color: #ffffff;
+    font-family:Arial;
 }
 
 #container
@@ -11,9 +12,14 @@ body
     background-color: #ffffff;
 }
 
+a:visited{
+    color: inherit;
+    text-decoration: none;
+}
+
 .rectangle
 {
-    width: 980px;
+    width: 880px;
     height: 100px;
     margin: 10px;
     background-color: #8e9991;

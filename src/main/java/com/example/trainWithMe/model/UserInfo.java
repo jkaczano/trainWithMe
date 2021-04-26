@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -22,9 +23,9 @@ public class UserInfo {
     private int pushUps;
     private int squats;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date date;
+    private LocalDate date;
 
-    public UserInfo(Long id, Long userID, float bodyMass, int height, int pullUps, int pushUps, int squats, Date date) {
+    public UserInfo(Long id, Long userID, float bodyMass, int height, int pullUps, int pushUps, int squats, LocalDate date) {
         this.id = id;
         this.userID = userID;
         this.bodyMass = bodyMass;
@@ -93,11 +94,11 @@ public class UserInfo {
         this.squats = squats;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 }

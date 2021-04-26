@@ -11,9 +11,14 @@
 
 <div id="container">
     <div class="rectangle">
-        <a href="hello"><img src="bic.png" style="padding-left: 20px; float: left;"></a>
-        <h1>Come and train with me!</h1>
-        Hello <span th:text = " ${role} "></span> <span th:text = "${name}"></span>
+        <a href="hello"><img src="bic.png" style="margin-top: 10px; padding-left: 20px; float: left;"></a>
+        <div style="margin-left: 200px;  float: left;">
+            <h1>Come and train with me!</h1>
+            Hello <span th:text = "${role}"></span> <span th:text = "${name}"></span>
+        </div>
+        <div style="float: left; margin-left: 150px;margin-top: 40px;">
+            <a href="logout">Logout</a>
+        </div>
     </div>
     <div class="square">
         <a href="myPlan"><div class="tile"><i class="icon-calendar"></i><br> Show workout schedule</div></a>
@@ -26,7 +31,9 @@
 
     <div class="square">
         <tr th:each="unit: ${units}">
+            <td th:text="${unit.getTopic()}">
             <td th:text="${unit.getDescription()}">
+            <td th:text="${unit.getDate()}">
         </tr>
     </div>
 
