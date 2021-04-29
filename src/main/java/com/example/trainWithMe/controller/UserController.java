@@ -65,6 +65,10 @@ public class UserController {
         userService.addUser(appUser);
         return "sign-up";
     }
+    @GetMapping("/login")
+    public String login(Model model){
+        return "login";
+    }
     @GetMapping("/token")
     public String token(@RequestParam String value){
         Token token = tokenRepo.findByValue(value);

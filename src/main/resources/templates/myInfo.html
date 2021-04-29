@@ -30,19 +30,35 @@
     <div class="square">
 
         <form th:action=@{/addInfo} method="post">
-            Body mass (kg):
-            <input type="text" step="any" name="bodyMass"><br>
-            Height (cm):
-            <input type="text" name="height"><br>
-            Pull ups:
-            <input type="text" name="pullUps"><br>
-            Push ups:
-            <input type="text" name="pushUps"><br>
-            Squats:
-            <input type="text" name="squats"><br>
-            Date:
-            <input type="date" name="date"><br>
-            <input type="submit" value="Add info">
+            <table id="infoTable">
+                <tr>
+                    <td>Body mass (kg):</td>
+                    <td><input type="text" step="any" name="bodyMass"></td>
+                </tr>
+                <tr>
+                    <td>Height (cm):</td>
+                    <td><input type="text" name="height"></td>
+                </tr>
+                <tr>
+                    <td>Pull ups:</td>
+                    <td><input type="text" name="pullUps"></td>
+                </tr>
+                <tr>
+                    <td>Push ups:</td>
+                    <td><input type="text" name="pushUps"></td>
+                </tr>
+                <tr>
+                    <td>Squats:</td>
+                    <td><input type="text" name="squats"></td>
+                </tr>
+                <tr>
+                    <td>Date:</td>
+                    <td><input type="date" name="date"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" ><input style="margin-left: 120px;" type="submit" value="Add info"></td>
+                </tr>
+            </table>
         </form>
 
     </div>

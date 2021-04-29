@@ -13,7 +13,7 @@
         <a href="hello"><img src="bic.png" style="margin-top: 10px; padding-left: 20px; float: left;"></a>
         <div style="margin-left: 200px;  float: left;">
             <h1>Come and train with me!</h1>
-            Hello <span th:text = "${role}"></span> <span th:text = "${name}"></span>
+            Hello <span th:text="${role}"></span> <span th:text="${name}"></span>
         </div>
         <div style="float: left; margin-left: 150px;margin-top: 40px;">
             <a href="logout">Logout</a>
@@ -21,25 +21,46 @@
     </div>
 
     <div class="square">
-        <a href="myPlan"><div class="tile"><i class="icon-calendar"></i><br> Show workout schedule</div></a>
-        <a href="progress"><div class="tile"><i class="icon-chart-line"></i><br> Track my progress</div></a>
+        <a href="myPlan">
+            <div class="tile"><i class="icon-calendar"></i><br> Show workout schedule</div>
+        </a>
+        <a href="progress">
+            <div class="tile"><i class="icon-chart-line"></i><br> Track my progress</div>
+        </a>
         <div style="clear: both;"></div>
-        <a href="excercises"><div class="tile"><i class="icon-list-alt"></i><br> Description of excersises</div></a>
-        <a href="about"><div class="tile"><i class="icon-user"></i><br>Why is my coach so awesome?</div></a>
+        <a href="excercises">
+            <div class="tile"><i class="icon-list-alt"></i><br> Description of excersises</div>
+        </a>
+        <a href="about">
+            <div class="tile"><i class="icon-user"></i><br>Why is my coach so awesome?</div>
+        </a>
         <div style="clear: both;"></div>
     </div>
 
-    <div class="square">
+    <div class="square" style="margin: auto;">
         <form th:action=@{/add} method="post">
-            Topic:
-            <input type="text" name="topic">
-            Description:
-            <input type="text" name="description">
-            User ID:
-            <input type="number" name="userID">
-            Date:
-            <input type="date" name="date">
-            <input type="submit" value="Add unit">
+            <table id="infoTable">
+                <tr>
+                    <td>Topic:</td>
+                    <td><input type="text" name="topic"></td>
+                </tr>
+                <tr>
+                    <td>Description:</td>
+                    <td><input type="text" name="description"></td>
+                </tr>
+                <tr>
+                    <td>User ID:</td>
+                    <td><input type="number" name="userID"></td>
+                </tr>
+                <tr>
+                    <td>Date:</td>
+                    <td><input type="date" name="date"></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input style="margin-left:100px;" type="submit" value="Add unit"></td>
+                </tr>
+
+            </table>
         </form>
     </div>
 

@@ -3,6 +3,8 @@ package com.example.trainWithMe.config;
 import com.example.trainWithMe.service.UserDetailsServiceImplementation;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -42,6 +44,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/myInfo").hasRole("USER")
                 .antMatchers("/static/favicon.ico").permitAll()
                 .and()
+                .formLogin()
+                .loginPage("/login").permitAll()
+                .and()
                 .formLogin().defaultSuccessUrl("/hello");
+    }
+
+    @Bean
+    AuthenticationProvider authenticationProvider(){
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(userDetailsServiceImplementation);
+        provider.setPasswordEncoder(new BCryptPasswordEncoder());
+        return provider;
     }
 }

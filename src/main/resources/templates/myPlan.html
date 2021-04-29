@@ -6,6 +6,8 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" type="text/css" href="fontello-846899ce/css/fontello.css">
     <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/evo-calendar@1.1.2/evo-calendar/css/evo-calendar.min.css"/>
+
 </head>
 <body>
 
@@ -35,6 +37,21 @@
             <td th:text="${unit.getDescription()}">
             <td th:text="${unit.getDate()}">
         </tr>
+
+        <div id="calendar"></div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/evo-calendar@1.1.2/evo-calendar/js/evo-calendar.min.js"></script>
+        <script src="js/evo-calendar.js"></script>
+
+        <script>
+        // initialize your calendar, once the page's DOM is ready
+        $(document).ready(function() {
+            $('#calendar').evoCalendar({
+                format: "yyyy-MM-dd",
+            })
+        })
+        </script>
     </div>
 
 
