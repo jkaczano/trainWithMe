@@ -104,6 +104,7 @@ a:visited{
 .invalid-feedback{
     font-size: 30px;
     text-align: left;
+    color: red;
 }
 
 ////////

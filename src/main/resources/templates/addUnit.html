@@ -38,27 +38,30 @@
     </div>
 
     <div class="square" style="margin: auto;">
-        <form th:action=@{/add} method="post" th:object="${unit}">
+        <form th:action=@{/addUnit} method="post" th:object="${unit}">
             <table id="infoTable">
                 <tr>
                     <td>Topic:</td>
-                    <td><input th:field="*{topic}" type="text" name="topic" th:errorClass="is-invalid"></td>
-                    <td th:if="${#fields.hasErrors('topic')}" th:errors="*{topic}"></td>
+                    <td><input th:field="*{topic}" type="text" name="topic" ></td>
+                    <td th:if="${#fields.hasErrors('topic')}" th:errors="*{topic}" class="invalid-feedback"></td>
                 </tr>
                 <tr>
                     <td>Description:</td>
-                    <td><input type="text" name="description"></td>
+                    <td><input th:field="*{description}" type="text" name="description"></td>
+                    <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="invalid-feedback"></td>
                 </tr>
                 <tr>
                     <td>User:</td>
-                    <td><select name="userID">
+                    <td><select name="userID" th:field="*{userID}">
                         <option value="0">Select user</option>
                         <option th:each="user: ${users}" th:value="${user.getId()}" th:text="${user.getUsername()}"></option>
+                    <td th:if="${#fields.hasErrors('userID')}" th:errors="*{userID}" class="invalid-feedback"></td>
                     </select></td>
                 </tr>
                 <tr>
                     <td>Date:</td>
-                    <td><input type="date" name="date"></td>
+                    <td><input type="date" name="date" th:field="*{date}"></td>
+                    <td th:if="${#fields.hasErrors('date')}" th:errors="*{date}" class="invalid-feedback"></td>
                 </tr>
                 <tr>
                     <td colspan="2"><input style="margin-left:100px;" type="submit" value="Add unit"></td>

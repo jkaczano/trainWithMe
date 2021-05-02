@@ -146,7 +146,7 @@ public class UserController {
     }
 
     @PostMapping("/addUnit")
-    public String add(@ModelAttribute("unit") @Valid TrainingUnit trainingUnit, Model model, BindingResult bindingResult){
+    public String add(@ModelAttribute("unit") @Valid TrainingUnit trainingUnit, BindingResult bindingResult, Model model){
         if (bindingResult.hasErrors()){
             return "addUnit";
         }
