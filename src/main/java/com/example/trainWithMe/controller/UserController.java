@@ -56,6 +56,11 @@ public class UserController {
     public String hello(Principal principal, Model model){
         model.addAttribute("name",principal.getName());
         model.addAttribute("role",getRole());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        AppUser appUser = (AppUser) authentication.getPrincipal();
+        List<TrainingUnit> infoList = trainingUnitRepo.findByUserID(appUser.getId());
+        model.addAttribute("hello",infoList.isEmpty());
+
         return "hello";
     }
 

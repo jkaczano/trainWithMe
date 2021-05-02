@@ -30,7 +30,10 @@
         <div style="clear: both;"></div>
     </div>
 
-    <div class="square">456</div>
+    <div class="square">
+        <div th:if="${hello}" style="font-size: 36px; text-align: center;"> At first, please add some info in 'Add my info' section </div>
+        <div th:unless="${hello}" style="font-size: 36px; text-align: center;"> Check your training schedule and keep going on! </div>
+    </div>
 
     <div style="clear: both;"></div>
     <div class="square">
