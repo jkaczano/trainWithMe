@@ -147,18 +147,21 @@ public class UserController {
 
     @PostMapping("/addUnit")
     public String add(@ModelAttribute("unit") @Valid TrainingUnit trainingUnit, BindingResult bindingResult, Model model){
+        List<AppUser> usersList = appUserRepo.findAll();
+        model.addAttribute("users",usersList);
         if (bindingResult.hasErrors()){
             return "addUnit";
         }
-        List<AppUser> usersList = appUserRepo.findAll();
-        model.addAttribute("users",usersList);
         trainingUnitRepo.save(trainingUnit);
         trainingUnitService.unitNotification(appUserRepo.findById(trainingUnit.getUserID()),trainingUnit);
         return "addUnit";
     }
 
     @PostMapping("/addInfo")
-    public String addInfo(UserInfo userInfo, Model model,Principal principal){
+    public String addInfo(@ModelAttribute("info") @Valid UserInfo userInfo, BindingResult bindingResult, Model model,Principal principal){
+        if (bindingResult.hasErrors()){
+            return "myInfo";
+        }
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         AppUser appUser = (AppUser) authentication.getPrincipal();
         userInfo.setUserID(appUser.getId());

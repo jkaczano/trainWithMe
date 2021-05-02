@@ -3,6 +3,7 @@ package com.example.trainWithMe.model;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
@@ -26,6 +27,7 @@ public class TrainingUnit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long unitID;
     @NotNull(message = "Choose user")
+    @Min(value = 1)
     private Long userID;
     @NotNull(message = "Enter description")
     @Size(max = 100, message = "Description is too long")

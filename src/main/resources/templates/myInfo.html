@@ -23,37 +23,43 @@
         <a href="myPlan"><div class="tile"><i class="icon-calendar"></i><br> Show workout schedule</div></a>
         <a href="progress"><div class="tile"><i class="icon-chart-line"></i><br> Track my progress</div></a>
         <div style="clear: both;"></div>
-        <a href="excercises"><div class="tile"><i class="icon-list-alt"></i><br> Add my info</div></a>
+        <a href="myInfo"><div class="tile"><i class="icon-list-alt"></i><br> Add my info</div></a>
         <a href="about"><div class="tile"><i class="icon-user"></i><br>Why is my coach so awesome?</div></a>
         <div style="clear: both;"></div>
     </div>
     <div class="square">
 
-        <form th:action=@{/addInfo} method="post">
+        <form th:action=@{/addInfo} method="post" th:object="${info}">
             <table id="infoTable">
                 <tr>
                     <td>Body mass (kg):</td>
-                    <td><input type="text" step="any" name="bodyMass"></td>
+                    <td><input th:field="*{bodyMass}" type="text" name="bodyMass"></td>
+                    <td th:if="${#fields.hasErrors('bodyMass')}" th:errors="*{bodyMass}" class="invalid-feedback"></td>
                 </tr>
                 <tr>
                     <td>Height (cm):</td>
-                    <td><input type="text" name="height"></td>
+                    <td><input th:field="*{height}" type="text" name="height"></td>
+                    <td th:if="${#fields.hasErrors('height')}" th:errors="*{height}" class="invalid-feedback"></td>
                 </tr>
                 <tr>
                     <td>Pull ups:</td>
-                    <td><input type="text" name="pullUps"></td>
+                    <td><input th:field="*{pullUps}" type="text" name="pullUps"></td>
+                    <td th:if="${#fields.hasErrors('pullUps')}" th:errors="*{pullUps}" class="invalid-feedback"></td>
                 </tr>
                 <tr>
                     <td>Push ups:</td>
-                    <td><input type="text" name="pushUps"></td>
+                    <td><input th:field="*{pushUps}" type="text" name="pushUps"></td>
+                    <td th:if="${#fields.hasErrors('pushUps')}" th:errors="*{pushUps}" class="invalid-feedback"></td>
                 </tr>
                 <tr>
                     <td>Squats:</td>
-                    <td><input type="text" name="squats"></td>
+                    <td><input th:field="*{squats}" type="text" name="squats"></td>
+                    <td th:if="${#fields.hasErrors('squats')}" th:errors="*{squats}" class="invalid-feedback"></td>
                 </tr>
                 <tr>
                     <td>Date:</td>
-                    <td><input type="date" name="date"></td>
+                    <td><input th:field="*{date}" type="date" name="date"></td>
+                    <td th:if="${#fields.hasErrors('date')}" th:errors="*{date}" class="invalid-feedback"></td>
                 </tr>
                 <tr>
                     <td colspan="2" ><input style="margin-left: 120px;" type="submit" value="Add info"></td>

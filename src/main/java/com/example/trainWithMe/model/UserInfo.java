@@ -1,11 +1,16 @@
 package com.example.trainWithMe.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -17,11 +22,24 @@ public class UserInfo {
 
     private Long userID;
 
+    @NotNull(message = "Enter your body mass")
+    @Min(value = 30, message = "Provide a number")
+    @Max(value = 500, message = "Provide a number")
     private float bodyMass;
+    @Min(value = 120, message = "Provide a number")
+    @Max(value = 300, message = "Provide a number")
+    @NotNull(message = "Enter your height")
     private int height;
+    @Min(value = 1, message = "Provide a number")
+    @NotNull(message = "How many pull ups can you do?")
     private int pullUps;
+    @Min(value = 1, message = "Provide a number")
+    @NotNull(message = "How many push ups can you do?")
     private int pushUps;
+    @Min(value = 1, message = "Provide a number")
+    @NotNull(message = "How many squats can you do?")
     private int squats;
+    @NotNull(message = "Enter date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 
