@@ -32,7 +32,7 @@ public class UserService {
         sendToken(appUser);
     }
 
-    private void sendToken(AppUser appUser) {
+    private void sendToken(AppUser appUser){
         String value = UUID.randomUUID().toString();
         Token token = new Token();
         token.setValue(value);

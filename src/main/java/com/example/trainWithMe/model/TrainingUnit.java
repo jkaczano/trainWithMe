@@ -3,6 +3,8 @@ package com.example.trainWithMe.model;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 @Entity
@@ -23,9 +25,15 @@ public class TrainingUnit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long unitID;
+    @NotNull(message = "Choose user")
     private Long userID;
+    @NotNull(message = "Enter description")
+    @Size(max = 100, message = "Description is too long")
     private String description;
+    @NotNull(message = "Enter a topic")
+    @Size(max = 25, message = "Topic is too long")
     private String topic;
+    @NotNull(message = "Choose a date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 

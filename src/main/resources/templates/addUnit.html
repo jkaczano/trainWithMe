@@ -38,19 +38,23 @@
     </div>
 
     <div class="square" style="margin: auto;">
-        <form th:action=@{/add} method="post">
+        <form th:action=@{/add} method="post" th:object="${unit}">
             <table id="infoTable">
                 <tr>
                     <td>Topic:</td>
-                    <td><input type="text" name="topic"></td>
+                    <td><input th:field="*{topic}" type="text" name="topic" th:errorClass="is-invalid"></td>
+                    <td th:if="${#fields.hasErrors('topic')}" th:errors="*{topic}"></td>
                 </tr>
                 <tr>
                     <td>Description:</td>
                     <td><input type="text" name="description"></td>
                 </tr>
                 <tr>
-                    <td>User ID:</td>
-                    <td><input type="number" name="userID"></td>
+                    <td>User:</td>
+                    <td><select name="userID">
+                        <option value="0">Select user</option>
+                        <option th:each="user: ${users}" th:value="${user.getId()}" th:text="${user.getUsername()}"></option>
+                    </select></td>
                 </tr>
                 <tr>
                     <td>Date:</td>

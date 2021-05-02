@@ -12,13 +12,17 @@ import com.example.trainWithMe.service.TrainingUnitService;
 import com.example.trainWithMe.service.UserService;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.*;
 
@@ -66,7 +70,7 @@ public class UserController {
         return "sign-up";
     }
     @GetMapping("/login")
-    public String login(Model model){
+    public String login(){
         return "login";
     }
     @GetMapping("/token")
@@ -123,8 +127,6 @@ public class UserController {
         json.add("mass",jsonMass);
         json.add("pullUps",jsonPullUps);
 
-        //Map<String,List<UserInfo>> dataMap = new HashMap<>();
-        //dataMap.put("bodyMass",infoList);
         return json.toString();
     }
 
@@ -132,12 +134,26 @@ public class UserController {
     public String addUnit(Model model){
         model.addAttribute("unit",new TrainingUnit());
         model.addAttribute("role",getRole());
+        List<AppUser> usersList = appUserRepo.findAll();
+        model.addAttribute("users",usersList);
         return "addUnit";
     }
 
-    @PostMapping("/add")
-    public String add(TrainingUnit trainingUnit){
+    @InitBinder
+    public void initBinder(WebDataBinder webDataBinder){
+        StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
+        webDataBinder.registerCustomEditor(String.class,stringTrimmerEditor);
+    }
+
+    @PostMapping("/addUnit")
+    public String add(@ModelAttribute("unit") @Valid TrainingUnit trainingUnit, Model model, BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            return "addUnit";
+        }
+        List<AppUser> usersList = appUserRepo.findAll();
+        model.addAttribute("users",usersList);
         trainingUnitRepo.save(trainingUnit);
+        trainingUnitService.unitNotification(appUserRepo.findById(trainingUnit.getUserID()),trainingUnit);
         return "addUnit";
     }
 

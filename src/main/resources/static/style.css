@@ -101,6 +101,11 @@ a:visited{
     display: none;
 }
 
+.invalid-feedback{
+    font-size: 30px;
+    text-align: left;
+}
+
 ////////
 .highcharts-figure, .highcharts-data-table table {
     min-width: 360px;
