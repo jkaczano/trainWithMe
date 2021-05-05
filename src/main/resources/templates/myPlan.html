@@ -5,20 +5,18 @@
     <title>Train with me!</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" type="text/css" href="fontello-846899ce/css/fontello.css">
-    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/evo-calendar@1.1.2/evo-calendar/css/evo-calendar.min.css"/>
 
 </head>
 <body>
 
 <div id="container">
     <div class="rectangle">
-        <a href="hello"><img src="bic.png" style="margin-top: 10px; padding-left: 20px; float: left;"></a>
+        <a href="hello"><img src="bic.png" id="logo"></a>
         <div style="margin-left: 200px;  float: left;">
             <h1>Come and train with me!</h1>
             Hello <span th:text = "${role}"></span> <span th:text = "${name}"></span>
         </div>
-        <div style="float: left; margin-left: 150px;margin-top: 40px;">
+        <div id="logout">
             <a href="logout">Logout</a>
         </div>
     </div>
@@ -38,20 +36,11 @@
             <td th:text="${unit.getDate()}">
         </tr>
 
-        <div id="calendar"></div>
+        <div id="calendar">
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/evo-calendar@1.1.2/evo-calendar/js/evo-calendar.min.js"></script>
-        <script src="js/evo-calendar.js"></script>
+        </div>
 
-        <script>
-        // initialize your calendar, once the page's DOM is ready
-        $(document).ready(function() {
-            $('#calendar').evoCalendar({
-                format: "yyyy-MM-dd",
-            })
-        })
-        </script>
+
     </div>
 
 
