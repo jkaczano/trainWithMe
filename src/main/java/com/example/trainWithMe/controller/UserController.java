@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.*;
 
 @Controller
@@ -122,17 +124,24 @@ public class UserController {
         JsonArray jsonDate = new JsonArray();
         JsonArray jsonMass = new JsonArray();
         JsonArray jsonPullUps = new JsonArray();
-        JsonObject json = new JsonObject();
+        JsonArray jsonBMI = new JsonArray();
+        JsonObject jsonObject = new JsonObject();
+        DecimalFormat df = new DecimalFormat("#0.00");
+        df.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.ENGLISH));
+
         infoList.forEach(info ->{
             jsonDate.add(String.valueOf(info.getDate()));
             jsonMass.add(info.getBodyMass());
             jsonPullUps.add(info.getPullUps());
+            jsonBMI.add(Float.parseFloat(df.format(info.getBodyMass()/
+                    ((info.getHeight()/100.0)*(info.getHeight()/100.0)))));
         });
-        json.add("date",jsonDate);
-        json.add("mass",jsonMass);
-        json.add("pullUps",jsonPullUps);
+        jsonObject.add("date",jsonDate);
+        jsonObject.add("mass",jsonMass);
+        jsonObject.add("pullUps",jsonPullUps);
+        jsonObject.add("bmi",jsonBMI);
 
-        return json.toString();
+        return jsonObject.toString();
     }
 
     @GetMapping("/addUnit")
@@ -164,6 +173,8 @@ public class UserController {
 
     @PostMapping("/addInfo")
     public String addInfo(@ModelAttribute("info") @Valid UserInfo userInfo, BindingResult bindingResult, Model model,Principal principal){
+        model.addAttribute("name",principal.getName());
+        model.addAttribute("role",getRole());
         if (bindingResult.hasErrors()){
             return "myInfo";
         }
@@ -172,8 +183,6 @@ public class UserController {
         userInfo.setUserID(appUser.getId());
         System.out.println(userInfo.getDate());
         userInfoRepo.save(userInfo);
-        model.addAttribute("name",principal.getName());
-        model.addAttribute("role",getRole());
         return "myInfo";
     }
 }

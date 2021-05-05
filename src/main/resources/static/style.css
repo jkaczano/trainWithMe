@@ -17,8 +17,9 @@ a:visited{
     text-decoration: none;
 }
 
-.infoTable{
+#infoTable{
     margin-top: 15px;
+    background-color: #8e9991;
 }
 
 #infoTable td, #infoTable th {
@@ -28,7 +29,7 @@ a:visited{
 
 .rectangle
 {
-    width: 980px;
+    width: 1000px;
     height: 100px;
     margin-bottom: 10px;
     background-color: #8e9991;
@@ -72,7 +73,14 @@ a:visited{
 
 .tile:hover
 {
-    background-color: #8a9587;
+    background-color: #7a9587;
+}
+
+.hello
+{
+    padding-top: 40px;
+    font-size: 36px;
+    text-align: center;
 }
 
 .yt
@@ -120,4 +128,3 @@ a:visited{
     text-align: left;
     color: red;
 }
-

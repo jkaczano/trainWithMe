@@ -1,18 +1,13 @@
 package com.example.trainWithMe.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 public class UserInfo {
@@ -23,11 +18,11 @@ public class UserInfo {
     private Long userID;
 
     @NotNull(message = "Enter your body mass")
-    @Min(value = 30, message = "Provide a number")
-    @Max(value = 500, message = "Provide a number")
+    @Min(value = 30, message = "Too small mass")
+    @Max(value = 500, message = "Too big mass")
     private float bodyMass;
-    @Min(value = 120, message = "Provide a number")
-    @Max(value = 300, message = "Provide a number")
+    @Min(value = 120, message = "You are too short")
+    @Max(value = 300, message = "You are too tall")
     @NotNull(message = "Enter your height")
     private int height;
     @Min(value = 1, message = "Provide a number")
@@ -39,7 +34,7 @@ public class UserInfo {
     @Min(value = 1, message = "Provide a number")
     @NotNull(message = "How many squats can you do?")
     private int squats;
-    @NotNull(message = "Enter date")
+    @NotNull(message = "Enter a date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 
